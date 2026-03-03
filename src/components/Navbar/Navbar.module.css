@@ -256,7 +256,7 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .topContact span:not(:first-child) { display: none; }
+  .topBar { display: none; }
 
   .navLinks { display: none; }
 
@@ -287,5 +287,7 @@
 }
 
 @media (max-width: 480px) {
-  .topContact { display: none; }
+  .navInner { height: 60px; }
+  .logoImg { height: 48px; }
+  .navLinks.navOpen { top: 60px; }
 }

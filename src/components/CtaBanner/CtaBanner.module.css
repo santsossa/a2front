@@ -32,6 +32,13 @@
 }
 
 @media (max-width: 768px) {
+  .banner { padding: 56px 0; }
   .inner  { flex-direction: column; text-align: center; }
   .actions { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .banner { padding: 48px 0; }
+  .actions { flex-direction: column; width: 100%; }
+  .actions > * { width: 100%; text-align: center; justify-content: center; }
 }

@@ -103,10 +103,15 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .whyInner { grid-template-columns: 1fr; gap: 48px; }
+  .whyUs { padding: 64px 0; }
+  .whyInner { grid-template-columns: 1fr; gap: 36px; }
   .whyVisual { min-height: 240px; }
 }
 
 @media (max-width: 480px) {
-  .whyFeatures { grid-template-columns: 1fr; }
+  .whyUs { padding: 48px 0; }
+  .whyInner { gap: 28px; }
+  .whyFeatures { grid-template-columns: 1fr; gap: 16px; }
+  .floatCard { right: 12px; bottom: 12px; padding: 10px 14px; gap: 8px; }
+  .floatCard strong { font-size: 0.9rem; }
 }

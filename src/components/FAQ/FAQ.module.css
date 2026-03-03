@@ -66,5 +66,12 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .faqInner { grid-template-columns: 1fr; gap: 40px; }
+  .faq { padding: 64px 0; }
+  .faqInner { grid-template-columns: 1fr; gap: 28px; }
+}
+
+@media (max-width: 480px) {
+  .faq { padding: 48px 0; }
+  .faqSummary { padding: 16px 18px; font-size: 0.88rem; }
+  .faqAnswer { padding: 0 18px 16px; }
 }

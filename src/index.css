@@ -177,3 +177,9 @@ a   { text-decoration: none; color: inherit; }
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ---------- MOBILE UTILITIES ---------- */
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .btn { padding: 11px 20px; font-size: 0.88rem; }
+}

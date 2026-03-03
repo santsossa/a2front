@@ -172,6 +172,14 @@
 }
 
 @media (max-width: 768px) {
+  .footer { padding: 56px 0 0; }
   .footerInner { grid-template-columns: 1fr; gap: 32px; }
   .footerBottom > div { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .footer { padding: 40px 0 0; }
+  .footerInner { gap: 24px; padding-bottom: 40px; }
+  .trustLogos { gap: 14px; }
+  .legal { flex-direction: column; gap: 10px; align-items: center; }
 }

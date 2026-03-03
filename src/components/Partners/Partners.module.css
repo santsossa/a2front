@@ -87,3 +87,14 @@
 .item:hover .name {
   color: var(--navy);
 }
+
+@media (max-width: 768px) {
+  .partners { padding: 28px 0; }
+  .item { padding: 0 20px; }
+}
+
+@media (max-width: 480px) {
+  .item { padding: 0 14px; }
+  .name { font-size: 0.8rem; }
+  .logo { height: 16px; }
+}

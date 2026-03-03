@@ -1361,3 +1361,11 @@
   .stepperLabel { display: none; }
   .dateCard { padding: 24px 20px 20px; }
 }
+
+@media (max-width: 480px) {
+  .compGrid { grid-template-columns: 1fr; }
+  .compColEPS, .compCellEPS { display: none; }
+  .compColMed { border-left: none; }
+  .compColHeader:first-child, .compRowLabel { display: none; }
+  .tMiniGrid { grid-template-columns: 1fr; }
+}
