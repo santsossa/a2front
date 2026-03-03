@@ -409,21 +409,32 @@
 }
 
 @media (max-width: 768px) {
-  .section { padding: 72px 0 80px; }
-  .grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .section { padding: 64px 0 72px; }
+  .header { margin-bottom: 40px; }
+  .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
   .cardWide { grid-column: span 2; }
+  .card { min-height: 180px; padding: 22px 20px 20px; }
   .cardIllustration { display: none; }
   .modalBody { padding: 28px 28px 36px; }
   .modalTitle { font-size: 1.3rem; }
 }
 
 @media (max-width: 540px) {
-  .grid { grid-template-columns: 1fr; }
-  .cardWide { grid-column: span 1; }
-  .header { margin-bottom: 36px; }
+  .section { padding: 56px 0 64px; }
+  .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cardWide { grid-column: span 2; }
+  .card { min-height: auto; padding: 18px 16px 16px; }
+  .cardIconBox { width: 40px; height: 40px; }
+  .header { margin-bottom: 32px; }
   .overlay { padding: 0; align-items: flex-end; }
   .modal { max-height: 96vh; border-radius: 16px 16px 0 0; }
   .modalBody { padding: 24px 22px 32px; }
   .modalTitle { font-size: 1.2rem; }
   .modalLead::first-letter { font-size: 3rem; }
+}
+
+@media (max-width: 400px) {
+  .grid { grid-template-columns: 1fr; }
+  .cardWide { grid-column: span 1; }
+  .section { padding: 48px 0 56px; }
 }

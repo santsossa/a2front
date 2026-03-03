@@ -14,7 +14,9 @@
    Fold
    ══════════════════════════════════════════ */
 .fold {
-  background: #f6f6fb;
+  background:
+    linear-gradient(160deg, rgba(246,246,251,0.91) 0%, rgba(236,240,250,0.82) 100%),
+    url('/images/Medicina-prepagada.png') center / cover no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
