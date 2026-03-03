@@ -1,0 +1,291 @@
+/* ── TOP BAR ── */
+.topBar {
+  background: var(--navy-dark);
+  padding: 8px 0;
+}
+
+.topInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.topSocials {
+  display: flex;
+  gap: 8px;
+}
+
+.topSocial {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.8);
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: lowercase;
+  transition: background var(--transition);
+}
+
+.topSocial:hover {
+  background: var(--gold);
+  color: var(--navy-dark);
+}
+
+.topContact {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.topContact span,
+.topContact a {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+  transition: color var(--transition);
+}
+
+.topContact a:hover {
+  color: var(--white);
+}
+
+/* ── NAVBAR ── */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--gray-200);
+  transition: box-shadow var(--transition);
+}
+
+.scrolled {
+  box-shadow: 0 4px 24px rgba(46,47,114,0.1);
+}
+
+.navInner {
+  display: flex;
+  align-items: center;
+  height: 72px;
+  gap: 40px;
+}
+
+/* ── LOGO ── */
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  height: 62px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── NAV LINKS ── */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  margin-left: auto;
+}
+
+.navLinks a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  transition: color var(--transition);
+}
+
+.navLinks a:hover {
+  color: var(--navy);
+}
+
+/* ── TRIGGER PRODUCTOS ── */
+.megaWrap {
+  position: relative;
+}
+
+.dropdownTrigger {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  font-family: var(--font);
+  padding: 0;
+  transition: color var(--transition);
+}
+
+.dropdownTrigger:hover { color: var(--navy); }
+
+.dropdownArrow {
+  transition: transform 0.22s ease;
+  opacity: 0.65;
+  color: currentColor;
+}
+
+.dropdownArrowOpen {
+  transform: rotate(180deg);
+}
+
+/* ── MEGA MENU ── */
+/* Outer wrapper: starts at top:100% with transparent padding-top  */
+/* so the mouse never leaves .megaWrap when crossing the visual gap */
+.megaMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  padding-top: 14px;  /* transparent bridge — keeps hover alive */
+  z-index: 200;
+}
+
+/* Visible card */
+.megaPanel {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 40px rgba(46,47,114,0.15), 0 1px 4px rgba(0,0,0,0.06);
+  border: 1px solid var(--gray-100, #f3f4f6);
+  padding: 22px 20px 20px;
+  position: relative;
+  animation: megaOpen 0.14s ease-out forwards;
+}
+
+/* Arrow pointer */
+.megaPanel::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 13px;
+  height: 13px;
+  background: #fff;
+  border-left: 1px solid var(--gray-100, #f3f4f6);
+  border-top: 1px solid var(--gray-100, #f3f4f6);
+}
+
+@keyframes megaOpen {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.megaTitle {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-400, #9ca3af);
+  margin: 0 0 12px 4px;
+}
+
+.megaDivider {
+  height: 1px;
+  background: var(--gray-100, #f3f4f6);
+  margin-bottom: 12px;
+}
+
+.megaGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.megaItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.14s ease;
+}
+
+.megaItem:hover {
+  background: rgba(46,47,114,0.05);
+}
+
+.megaItemIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: rgba(46,47,114,0.07);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.14s ease;
+}
+
+.megaItem:hover .megaItemIcon {
+  background: rgba(46,47,114,0.13);
+}
+
+.megaItemLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text, #111827);
+  line-height: 1.2;
+}
+
+/* ── HAMBURGER ── */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--navy);
+  margin-left: auto;
+  line-height: 1;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .topContact span:not(:first-child) { display: none; }
+
+  .navLinks { display: none; }
+
+  .navLinks.navOpen {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: 16px 24px 24px;
+    border-bottom: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-md);
+  }
+
+  .navLinks.navOpen a {
+    padding: 10px 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--gray-100);
+    width: 100%;
+  }
+
+  .megaMenu { display: none; }
+  .hamburger { display: block; }
+}
+
+@media (max-width: 480px) {
+  .topContact { display: none; }
+}

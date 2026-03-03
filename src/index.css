@@ -1,0 +1,179 @@
+/* =============================================
+   ASEGURA2.COM — Global Styles
+   Variables, reset, utilities compartidos
+   ============================================= */
+
+/* ---------- VARIABLES ---------- */
+:root {
+  --navy:       rgb(46, 47, 114);
+  --navy-dark:  rgb(30, 31, 80);
+  --navy-light: rgba(46, 47, 114, 0.08);
+  --gold:       rgb(246, 180, 33);
+  --gold-dark:  rgb(210, 150, 20);
+
+  --white:      #ffffff;
+  --off-white:  #f7f8fc;
+  --gray-100:   #f1f3f9;
+  --gray-200:   #e4e7f0;
+  --gray-400:   #9ca3b8;
+  --gray-600:   #5a6071;
+  --text:       #1a1d2e;
+
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  24px;
+  --radius-xl:  40px;
+
+  --shadow-sm:  0 2px 8px rgba(46, 47, 114, 0.08);
+  --shadow-md:  0 8px 32px rgba(46, 47, 114, 0.12);
+  --shadow-lg:  0 20px 60px rgba(46, 47, 114, 0.18);
+
+  --transition: 0.25s ease;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ---------- RESET ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+ul  { list-style: none; }
+a   { text-decoration: none; color: inherit; }
+
+/* ---------- CONTAINER ---------- */
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- TYPOGRAPHY UTILITIES ---------- */
+.highlight {
+  color: var(--navy);
+}
+
+.sectionEyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.center { text-align: center; }
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 24px;
+  border-radius: var(--radius-xl);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: 2px solid transparent;
+  white-space: nowrap;
+  font-family: var(--font);
+}
+
+.btnPrimary {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+.btnPrimary:hover {
+  background: var(--navy-dark);
+  border-color: var(--navy-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btnOutline {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--navy);
+}
+.btnOutline:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.btnOutlineDark {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--gray-200);
+}
+.btnOutlineDark:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+.btnGhost {
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--text);
+  border-color: var(--gray-200);
+  backdrop-filter: blur(8px);
+}
+.btnGhost:hover {
+  background: white;
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+.btnYellow {
+  background: var(--gold);
+  color: var(--navy-dark);
+  border-color: var(--gold);
+  font-weight: 700;
+}
+.btnYellow:hover {
+  background: var(--gold-dark);
+  border-color: var(--gold-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(246, 180, 33, 0.35);
+}
+
+.btnWhiteOutline {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.btnWhiteOutline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- SCROLL ANIMATIONS ---------- */
+.fadeIn {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.fadeIn.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

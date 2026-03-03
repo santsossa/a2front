@@ -1,0 +1,401 @@
+/* ── Page wrapper ── */
+.page {
+  padding-top: 100px;
+}
+
+/* ── Hero ── */
+.hero {
+  background: var(--off-white);
+  border-top: 4px solid var(--navy);
+  padding: 72px 20px 64px;
+}
+
+.heroInner {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text);
+  margin: 14px 0 28px;
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.heroCopy p {
+  font-size: 1rem;
+  color: var(--gray-600);
+  line-height: 1.75;
+  text-align: left;
+}
+
+.heroBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-xl);
+  padding: 8px 16px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* ── Valores ── */
+.valuesSection {
+  padding: 80px 20px;
+  background: var(--white);
+  border-top: 1px solid var(--gray-200);
+}
+
+.valuesInner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.valuesTitle {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.valueCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px 28px;
+  border: 1.5px solid var(--gray-200);
+  border-top: 3px solid var(--navy);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.valueCard:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.valueIconWrap {
+  width: 52px;
+  height: 52px;
+  background: var(--navy-light);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+}
+
+.valueText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.valueCardTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.valueCardDesc {
+  font-size: 0.92rem;
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+/* ── Documentos legales ── */
+.legalSection {
+  padding: 80px 20px;
+  background: var(--off-white);
+  border-top: 1px solid var(--gray-200);
+}
+
+.legalInner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.legalTitle {
+  margin-bottom: 12px;
+}
+
+.legalSub {
+  font-size: 0.97rem;
+  color: var(--gray-600);
+  line-height: 1.7;
+  max-width: 640px;
+  margin-bottom: 40px;
+}
+
+/* ── Docs grid ── */
+.docsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.docCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  font-family: inherit;
+}
+
+.docCard:hover {
+  border-color: var(--navy);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.docCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pdfBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fef2f2;
+  color: #dc2626;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+
+.docTitle {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.docDesc {
+  font-size: 0.84rem;
+  color: var(--gray-600);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.docCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-top: 4px;
+  transition: gap var(--transition);
+}
+
+.docCard:hover .docCta {
+  gap: 8px;
+}
+
+/* ── Legal note ── */
+.legalNote {
+  margin-top: 32px;
+  font-size: 0.88rem;
+  color: var(--gray-600);
+  text-align: center;
+}
+
+.legalNote a {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.legalNote a:hover {
+  text-decoration: underline;
+}
+
+/* ── PDF Modal ── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 30, 0.65);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modalPanel {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 940px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--gray-200);
+  background: var(--off-white);
+  flex-shrink: 0;
+}
+
+.modalTitleWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.modalTitle {
+  font-size: 0.93rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modalActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.modalDownload {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--navy);
+  padding: 7px 14px;
+  border: 1.5px solid var(--navy);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  transition: background var(--transition), color var(--transition);
+  text-decoration: none;
+}
+
+.modalDownload:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-600);
+  padding: 7px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  transition: color var(--transition), background var(--transition);
+}
+
+.modalClose:hover {
+  color: var(--text);
+  background: var(--gray-100);
+}
+
+.modalViewer {
+  flex: 1;
+  overflow: hidden;
+}
+
+.pdfFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .valuesGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-top: 80px;
+  }
+
+  .hero {
+    padding: 52px 20px 48px;
+  }
+
+  .heroCopy p {
+    text-align: center;
+  }
+
+  .heroBadges {
+    gap: 8px;
+  }
+
+  .valuesSection {
+    padding: 56px 20px;
+  }
+
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .legalSection {
+    padding: 56px 20px;
+  }
+
+  .docsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .modalPanel {
+    height: 95vh;
+  }
+
+  .modalTitle {
+    display: none;
+  }
+}

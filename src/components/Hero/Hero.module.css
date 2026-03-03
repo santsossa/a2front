@@ -1,0 +1,193 @@
+.hero {
+  padding: 48px 0 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.heroInner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  align-items: center;
+}
+
+/* ════════════════ LEFT ════════════════ */
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.title {
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.14;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.titleAccent {
+  color: var(--navy);
+  display: inline-block;
+}
+
+/* Typing cursor */
+.cursor {
+  display: inline-block;
+  color: var(--navy);
+  font-weight: 300;
+  margin-left: 1px;
+  animation: blink 1s step-end infinite;
+}
+
+.cursorBlink {
+  animation: none;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Stats row — single horizontal line like Insurex */
+.statsRow {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding-right: 28px;
+  margin-right: 28px;
+  border-right: 1px solid var(--gray-200);
+}
+
+.stat:last-child {
+  border-right: none;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+.statNum {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.statLbl {
+  font-size: 0.72rem;
+  color: var(--gray-600);
+  margin-top: 4px;
+  line-height: 1.3;
+  max-width: 80px;
+}
+
+/* CTA row */
+.ctaRow {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ── Recognition Awards (laurel style) ── */
+.awardsRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.awardCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 24px;
+  border-right: 1px solid var(--gray-200);
+}
+
+.awardCard:first-child { padding-left: 0; }
+.awardCard:last-child  { border-right: none; padding-right: 0; }
+
+.awardTop {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* Laurel SVG */
+.laurel {
+  width: 18px;
+  height: 36px;
+  color: #404147;
+  flex-shrink: 0;
+}
+
+.awardCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+}
+
+/* For the 98% text badge */
+.awardBigText {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.awardLabel {
+  font-size: 0.67rem;
+  color: var(--gray-500);
+  text-align: center;
+  line-height: 1.35;
+  white-space: pre-line;
+  font-weight: 500;
+  max-width: 88px;
+}
+
+/* ════════════════ RIGHT ════════════════ */
+.right {
+  position: relative;
+  align-self: stretch;
+  min-height: 520px;
+  overflow: visible;
+}
+
+/* Main illustration — centered and overflows the column so it looks big */
+.illustration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160%;
+  height: 160%;
+  object-fit: contain;
+  object-position: center center;
+}
+
+/* ════════════════ RESPONSIVE ════════════════ */
+@media (max-width: 1024px) {
+  .statsRow { gap: 0; }
+  .stat { padding-right: 18px; margin-right: 18px; }
+}
+
+@media (max-width: 768px) {
+  .heroInner   { grid-template-columns: 1fr; gap: 32px; }
+  .right       { order: -1; min-height: 300px; height: 300px; align-self: auto; overflow: hidden; }
+  .illustration{ width: 100%; height: 100%; top: 0; left: 0; transform: none; }
+  .statsRow    { flex-wrap: wrap; gap: 16px; }
+  .stat        { border-right: none; padding-right: 0; margin-right: 0; width: 45%; }
+}
+
+@media (max-width: 480px) {
+  .title       { font-size: 2rem; }
+  .right       { min-height: 220px; height: 220px; }
+  .stat        { width: auto; }
+}
