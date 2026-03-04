@@ -688,9 +688,6 @@ export default function CotizarMedicina() {
                 <span className={styles.sideFieldLabel}>Celular</span>
                 <span className={styles.sideFieldVal}>{form.telefono}</span>
               </div>
-              <button className={styles.sideEditBtn} onClick={() => setPhase('form')}>
-                Editar datos →
-              </button>
             </div>
 
             <div className={styles.sideCard}>

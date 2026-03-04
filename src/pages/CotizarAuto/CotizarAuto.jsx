@@ -5,11 +5,20 @@ import Footer      from '../../components/Footer/Footer'
 import styles      from './CotizarAuto.module.css'
 
 /* ── helpers ── */
-const formatPlate = raw =>
-  raw.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 6)
+const formatPlate = raw => {
+  const clean = raw.replace(/[^A-Za-z0-9]/g, '').toUpperCase()
+  let out = '', letters = 0, digits = 0
+  for (const ch of clean) {
+    if (/[A-Z]/.test(ch) && letters < 3 && digits === 0) { out += ch; letters++ }
+    else if (/[0-9]/.test(ch) && letters === 3 && digits < 3) { out += ch; digits++ }
+  }
+  return out
+}
 
 const displayPlate = plate =>
   plate.length > 3 ? plate.slice(0, 3) + ' ' + plate.slice(3) : plate
+
+const isValidPlate = plate => /^[A-Z]{3}\d{3}$/.test(plate)
 
 const formatPrice = n =>
   '$' + n.toLocaleString('es-CO')
@@ -225,7 +234,7 @@ export default function CotizarAuto() {
   const [plate,         setPlate]         = useState('')
   const [step,          setStep]          = useState(1)
   const [expandedId,    setExpandedId]    = useState(null)
-  const [numDocFocused, setNumDocFocused] = useState(false)
+  const [showDoc, setShowDoc] = useState(false)
 
   const togglePlan = id => setExpandedId(prev => prev === id ? null : id)
   const [form, setForm] = useState({
@@ -243,7 +252,7 @@ export default function CotizarAuto() {
 
   function handlePlate(e) {
     e.preventDefault()
-    if (plate.length >= 5) { setStep(1); setPhase('form') }
+    if (isValidPlate(plate)) { setStep(1); setPhase('form') }
   }
 
   /* ── Landing ── */
@@ -294,7 +303,10 @@ export default function CotizarAuto() {
                 autoFocus
               />
             </div>
-            <button className={styles.ctaBtn} type="submit" disabled={plate.length < 5}>
+            {plate.length > 0 && !isValidPlate(plate) && (
+              <span className={styles.plateError}>Formato: 3 letras y 3 números (ej. ABC 123)</span>
+            )}
+            <button className={styles.ctaBtn} type="submit" disabled={!isValidPlate(plate)}>
               Cotizar mi seguro →
             </button>
           </form>
@@ -529,15 +541,32 @@ export default function CotizarAuto() {
                     <label className={styles.fieldLabel}>
                       <span className={styles.fieldLabelWithIcon}>🔒 Número de documento</span>
                     </label>
-                    <input
-                      className={styles.input}
-                      placeholder="Ej. 1023456789"
-                      autoFocus
-                      value={numDocFocused ? form.numDoc : maskedDoc(form.numDoc)}
-                      onFocus={() => setNumDocFocused(true)}
-                      onBlur={() => setNumDocFocused(false)}
-                      onChange={e => setF('numDoc', e.target.value.replace(/\D/g, ''))}
-                    />
+                    <div className={styles.docInputWrap}>
+                      <input
+                        className={`${styles.input} ${styles.inputDoc}`}
+                        type={showDoc ? 'text' : 'password'}
+                        inputMode="numeric"
+                        placeholder="Ej. 1023456789"
+                        autoFocus
+                        value={form.numDoc}
+                        onChange={e => setF('numDoc', e.target.value.replace(/\D/g, ''))}
+                      />
+                      <button type="button" className={styles.docToggleBtn}
+                        onClick={() => setShowDoc(s => !s)}
+                        aria-label={showDoc ? 'Ocultar número' : 'Mostrar número'}>
+                        {showDoc ? (
+                          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/>
+                            <line x1="1" y1="1" x2="23" y2="23"/>
+                          </svg>
+                        ) : (
+                          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                          </svg>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div className={`${styles.field} ${styles.fieldFull}`}>
@@ -709,9 +738,6 @@ export default function CotizarAuto() {
                 <span className={styles.sideFieldLabel}>{form.tipoDoc}</span>
                 <span className={styles.sideFieldVal}>{maskedDoc(form.numDoc)}</span>
               </div>
-              <button className={styles.sideEditBtn} onClick={() => setPhase('form')}>
-                Editar datos →
-              </button>
             </div>
 
             <div className={styles.sideCard}>

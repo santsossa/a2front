@@ -1444,3 +1444,23 @@
   .planRowBtn { font-size: 0.66rem; padding: 7px 6px; }
   .planRowExpandBtn { font-size: 0.58rem; padding: 4px 6px; }
 }
+
+/* ── Pantallas muy pequeñas ≤360px ── */
+@media (max-width: 360px) {
+  /* Fold landing */
+  .fold { padding: 32px 16px 28px; gap: 14px; }
+  .h1 { font-size: 1.2rem; }
+  .featureTag { font-size: 0.64rem; padding: 3px 8px; }
+  .dateCard { padding: 14px 12px 12px; }
+  .ctaBtn { font-size: 0.8rem; padding: 10px; }
+
+  /* Formulario */
+  .stepForm { padding: 18px 14px; }
+
+  /* Resultados */
+  .planRow { grid-template-columns: 40px 1fr 104px; padding: 10px 10px; }
+  .planRowCoverages { padding: 0 6px; }
+  .planRowActions { padding-left: 6px; }
+  .planRowAmount { font-size: 0.88rem; }
+  .planRowBtn { font-size: 0.62rem; padding: 6px 5px; }
+}

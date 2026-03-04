@@ -89,7 +89,7 @@
 }
 
 @media (max-width: 768px) {
-  .partners { padding: 28px 0; }
+  .partners { padding: 28px 0 48px; }
   .item { padding: 0 20px; }
 }
 

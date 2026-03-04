@@ -213,3 +213,22 @@
   .awardBigText { font-size: 1.1rem; }
   .laurel      { width: 13px; height: 26px; }
 }
+
+/* ── iPhone 14 Pro and below: prevent stats/awards from re-stacking ── */
+@media (max-width: 420px) {
+  /* Tighten stats so all 4 stay on one row */
+  .statsRow { gap: 6px; }
+  .statLbl  { font-size: 0.6rem; max-width: 66px; }
+  /* Force awards onto a single row */
+  .awardsRow  { flex-wrap: nowrap; gap: 2px; }
+  .awardCard  { padding: 4px 5px 4px 0; }
+  .awardLabel { font-size: 0.58rem; max-width: 60px; }
+  .laurel     { width: 10px; height: 20px; }
+}
+
+@media (max-width: 360px) {
+  .title        { font-size: 1.6rem; }
+  .right        { min-height: 160px; height: 160px; }
+  .awardBigText { font-size: 0.9rem; }
+  .statLbl      { max-width: 56px; }
+}
