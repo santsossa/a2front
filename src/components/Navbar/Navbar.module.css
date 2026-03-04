@@ -141,19 +141,16 @@
 }
 
 /* ── MEGA MENU ── */
-/* Outer wrapper: starts at top:100% with transparent padding-top  */
-/* so the mouse never leaves .megaWrap when crossing the visual gap */
 .megaMenu {
   position: absolute;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
   width: 480px;
-  padding-top: 14px;  /* transparent bridge — keeps hover alive */
+  padding-top: 14px;
   z-index: 200;
 }
 
-/* Visible card */
 .megaPanel {
   background: #fff;
   border-radius: 18px;
@@ -164,7 +161,6 @@
   animation: megaOpen 0.14s ease-out forwards;
 }
 
-/* Arrow pointer */
 .megaPanel::before {
   content: '';
   position: absolute;
@@ -242,52 +238,175 @@
   line-height: 1.2;
 }
 
-/* ── HAMBURGER ── */
+/* ── HAMBURGER (3 barras animadas) ── */
 .hamburger {
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
   background: none;
   border: none;
-  font-size: 1.4rem;
   cursor: pointer;
-  color: var(--navy);
   margin-left: auto;
-  line-height: 1;
+  padding: 4px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.hamburger:hover {
+  background: rgba(46,47,114,0.07);
+}
+
+.hbar {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: transform 0.28s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.2s ease,
+              width 0.28s ease;
+  transform-origin: center;
+}
+
+/* Barra 1 → diagonal / */
+.hbarOpen1 {
+  transform: translateY(7px) rotate(45deg);
+}
+
+/* Barra 2 → desaparece */
+.hbarOpen2 {
+  opacity: 0;
+  width: 0;
+}
+
+/* Barra 3 → diagonal \ */
+.hbarOpen3 {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Menú móvil inline de productos (oculto en desktop) ── */
+.mobileProducts {
+  display: none;
 }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .topBar { display: none; }
 
-  .navLinks { display: none; }
-
-  .navLinks.navOpen {
-    display: flex;
+  /* Cortina: siempre en el DOM, animada con max-height */
+  .navLinks {
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
+    gap: 0;
+    margin-left: 0;
     position: absolute;
     top: 72px;
     left: 0;
     right: 0;
     background: var(--white);
-    padding: 16px 24px 24px;
-    border-bottom: 1px solid var(--gray-200);
-    box-shadow: var(--shadow-md);
+    border-bottom: 2px solid var(--gray-200);
+    box-shadow: 0 12px 32px rgba(46,47,114,0.13);
+    /* Estado cerrado */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    padding: 0 24px;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.28s ease,
+                padding 0.4s ease;
   }
 
-  .navLinks.navOpen a {
-    padding: 10px 0;
-    font-size: 1rem;
+  /* Estado abierto — cortina baja */
+  .navLinks.navOpen {
+    max-height: 700px;
+    opacity: 1;
+    pointer-events: auto;
+    padding: 8px 24px 24px;
+  }
+
+  /* Items directos dentro del nav */
+  .navLinks > a {
+    display: block;
+    padding: 13px 0;
+    font-size: 1rem !important;
     border-bottom: 1px solid var(--gray-100);
     width: 100%;
   }
 
+  /* Wrapper de productos */
+  .megaWrap {
+    width: 100%;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .dropdownTrigger {
+    width: 100%;
+    padding: 13px 0;
+    font-size: 1rem;
+    justify-content: space-between;
+    border-bottom: none;
+  }
+
+  /* Ocultar mega menu flotante en móvil */
   .megaMenu { display: none; }
-  .hamburger { display: block; }
+
+  /* Lista de productos inline en móvil */
+  .mobileProducts {
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    width: 100%;
+    gap: 2px;
+    padding: 0;
+    transition: max-height 0.32s ease, padding 0.32s ease;
+  }
+
+  .mobileProductsOpen {
+    max-height: 500px;
+    padding: 6px 0 10px;
+  }
+
+  .mobileProductItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 10px;
+    border-radius: 9px;
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: background 0.14s ease;
+  }
+
+  .mobileProductItem:hover,
+  .mobileProductItem:active {
+    background: rgba(46,47,114,0.06);
+  }
+
+  .mobileProductIcon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(46,47,114,0.07);
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Mostrar hamburger */
+  .hamburger { display: flex; }
 }
 
 @media (max-width: 480px) {
   .navInner { height: 60px; }
   .logoImg { height: 48px; }
-  .navLinks.navOpen { top: 60px; }
+  .navLinks { top: 60px; }
 }

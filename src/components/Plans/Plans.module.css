@@ -411,30 +411,44 @@
 @media (max-width: 768px) {
   .section { padding: 64px 0 72px; }
   .header { margin-bottom: 40px; }
-  .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  /* grid-auto-flow: dense rellena huecos que dejan las cards anchas */
+  .grid { grid-template-columns: 1fr 1fr; gap: 12px; grid-auto-flow: dense; }
   .cardWide { grid-column: span 2; }
   .card { min-height: 180px; padding: 22px 20px 20px; }
+  /* Última card sola ocupa el ancho completo — sin hueco */
+  .card:last-child { grid-column: 1 / -1; }
+  .cardTitle { font-size: 0.88rem; }
   .cardIllustration { display: none; }
   .modalBody { padding: 28px 28px 36px; }
   .modalTitle { font-size: 1.3rem; }
 }
 
 @media (max-width: 540px) {
-  .section { padding: 56px 0 64px; }
-  .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .section { padding: 52px 0 60px; }
+  /* 2 columnas con flujo denso — sin huecos */
+  .grid { grid-template-columns: 1fr 1fr; gap: 10px; grid-auto-flow: dense; }
   .cardWide { grid-column: span 2; }
-  .card { min-height: auto; padding: 18px 16px 16px; }
-  .cardIconBox { width: 40px; height: 40px; }
+  /* Última card sola → ancho completo */
+  .card:last-child { grid-column: 1 / -1; }
+  .card { min-height: auto; padding: 18px 13px 16px; overflow: hidden; }
+  .cardIconBox { width: 38px; height: 38px; border-radius: 10px; }
+  .cardIconBox svg { width: 22px; height: 22px; }
+  .cardCategory { font-size: 0.56rem; }
+  .cardTitle { font-size: 0.78rem; line-height: 1.3; word-break: break-word; }
+  /* Botón más compacto para columnas angostas */
+  .cardBtn { font-size: 0.64rem; padding: 5px 9px; gap: 4px; }
   .header { margin-bottom: 32px; }
   .overlay { padding: 0; align-items: flex-end; }
   .modal { max-height: 96vh; border-radius: 16px 16px 0 0; }
-  .modalBody { padding: 24px 22px 32px; }
+  .modalBody { padding: 24px 20px 32px; }
   .modalTitle { font-size: 1.2rem; }
   .modalLead::first-letter { font-size: 3rem; }
 }
 
-@media (max-width: 400px) {
-  .grid { grid-template-columns: 1fr; }
-  .cardWide { grid-column: span 1; }
-  .section { padding: 48px 0 56px; }
+/* Pantallas muy pequeñas (≤360px) */
+@media (max-width: 360px) {
+  .grid { gap: 8px; }
+  .card { padding: 15px 11px 13px; }
+  .cardTitle { font-size: 0.74rem; }
+  .cardBtn { font-size: 0.6rem; padding: 4px 8px; }
 }

@@ -15,8 +15,9 @@
    ══════════════════════════════════════════ */
 .fold {
   background:
-    linear-gradient(160deg, rgba(246,246,251,0.91) 0%, rgba(236,240,250,0.82) 100%),
-    url('/images/Seguro-de-veh%C3%ADculo-asistencia.png') center / cover no-repeat;
+    linear-gradient(rgba(240,240,248,0.92), rgba(240,240,248,0.92)),
+    url('/images/seguro-vehiculo.png') center / cover no-repeat;
+  background-color: #f6f6fb;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,8 +149,86 @@
   font-size: 0.76rem;
   font-weight: 600;
   color: var(--gray-600, #4b5563);
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   margin-bottom: 6px;
+}
+
+.fieldLabelWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Discount progress bar ── */
+.discountBar {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0 2px 2px;
+}
+
+.discountBarTrack {
+  height: 4px;
+  background: rgba(46,47,114,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.discountBarFill {
+  height: 100%;
+  background: rgb(246,180,33);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  min-width: 4px;
+}
+
+.discountBarLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.64rem;
+  color: var(--gray-400);
+}
+
+.discountBarLabel strong {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+/* ── Date triple selects ── */
+.dateTriple {
+  display: grid;
+  grid-template-columns: 72px 1fr 96px;
+  gap: 8px;
+}
+
+/* ── Field reward tags ── */
+.fieldRewardTag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: rgb(140, 95, 0);
+  background: rgba(246,180,33,0.14);
+  border: 1px solid rgba(246,180,33,0.38);
+  border-radius: 20px;
+  padding: 2px 8px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.fieldDoneTag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #15803d;
+  background: rgba(22,163,74,0.1);
+  border: 1px solid rgba(22,163,74,0.28);
+  border-radius: 20px;
+  padding: 2px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
 }
 
 /* Plate input */
@@ -1386,6 +1465,43 @@
   margin-bottom: 3px;
 }
 
+.planRowOldPriceRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 1px;
+}
+
+.planRowOldPrice {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--gray-400);
+  text-decoration: line-through;
+  line-height: 1;
+}
+
+.planRowDiscountBadge {
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #15803d;
+  background: #dcfce7;
+  border-radius: 4px;
+  padding: 1px 5px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.discountAppliedBanner {
+  background: rgba(22,163,74,0.07);
+  border: 1px solid rgba(22,163,74,0.22);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #15803d;
+  margin-bottom: 18px;
+}
+
 .planRowAmount {
   font-size: 1.5rem;
   font-weight: 900;
@@ -1839,6 +1955,22 @@
   .formSidebar { display: none; }
 }
 
+@media (max-width: 600px) {
+  .fold { min-height: unset; height: auto; padding: 40px 28px 32px; gap: 18px; }
+  .foldText { max-width: 320px; }
+  .h1 { font-size: clamp(1.25rem, 6.5vw, 1.7rem); margin: 0 0 12px; }
+  .featureTags { gap: 6px; }
+  .featureTag { font-size: 0.70rem; padding: 4px 10px; }
+  .plateCard { max-width: 320px; padding: 18px 16px 14px; }
+  .plateCardHead { margin-bottom: 14px; }
+  .plateCardHead h2 { font-size: 0.9rem; }
+  .plateCardHead p { font-size: 0.72rem; }
+  .plateInput { font-size: 0.95rem; height: 40px; }
+  .plateFlag { height: 40px; font-size: 0.56rem; }
+  .ctaBtn { padding: 11px; font-size: 0.84rem; }
+  .logosWrap { display: none; }
+}
+
 @media (max-width: 1100px) {
   .resultsLayout { grid-template-columns: 240px 1fr; }
 }
@@ -1851,25 +1983,92 @@
 }
 
 @media (max-width: 768px) {
-  .resultsTopBar { padding: 0 16px; overflow-x: auto; }
+  /* ── Barra superior ── */
+  .resultsTopBar { padding: 0 14px; overflow-x: auto; }
   .resultsTopBarInner { height: auto; padding: 12px 0; gap: 16px; flex-wrap: wrap; }
   .rtbItem { padding: 0; }
   .rtbDivider { display: none; }
   .whatsappSection { flex-direction: column; text-align: center; padding: 24px 20px; }
   .whatsappBtn { width: 100%; justify-content: center; }
-  .resultsPage { padding: 20px 16px 80px; }
+  .resultsPage { padding: 16px 14px 80px; }
   .whatsappWrapper { margin-top: 32px; padding-top: 32px; }
-  .resultsLayout { grid-template-columns: 1fr; }
-  .resultsSidebar { position: static; flex-direction: column; }
-  .planRow { grid-template-columns: 1fr; gap: 12px; padding: 18px 16px; }
-  .planRowLogoCol { padding-right: 0; }
-  .planRowCoverages { border-left: none; border-right: none; padding: 12px 0; border-top: 1px solid var(--gray-100, #f3f4f6); border-bottom: 1px solid var(--gray-100, #f3f4f6); }
-  .planRowActions { padding-left: 0; }
-  .planExpansion { margin: 10px -16px -18px; border-radius: 0 0 12px 12px; }
+
+  /* ── Layout general ── */
+  .resultsLayout { grid-template-columns: 1fr; gap: 0; }
+
+  /* ── Sidebar → franja compacta de datos al tope ── */
+  .resultsSidebar { position: static; flex-direction: column; gap: 0; margin-bottom: 16px; }
+
+  /* Primer sideCard: "Tu cotización" → tira horizontal de datos */
+  .sideCard:first-child {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 20px;
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+  .sideCard:first-child .sideCardTitle { display: none; }
+  .sideCard:first-child .sideField { flex-direction: row; align-items: center; gap: 4px; }
+  .sideCard:first-child .sideFieldLabel { font-size: 0.52rem; letter-spacing: 0.04em; }
+  .sideCard:first-child .sideFieldVal { font-size: 0.76rem; font-weight: 700; }
+  .sideCard:first-child .sideEditBtn { width: auto; padding: 5px 12px; font-size: 0.68rem; margin-top: 0; }
+
+  /* Segundo sideCard: "¿Cómo funciona?" → oculto en móvil */
+  .sideCard:last-child { display: none; }
+
+  /* ── Plan rows → 3 columnas horizontales (estilo PC adaptado) ── */
+  .planRow {
+    grid-template-columns: 52px 1fr 128px;
+    gap: 0;
+    padding: 14px 14px;
+    align-items: center;
+  }
+  .planRowLogoCol { padding: 0; justify-content: flex-start; }
+  .planRowLogo { height: 32px; max-width: 46px; }
+
+  /* Columna coberturas: bordes laterales restaurados, sin borde arriba/abajo */
+  .planRowCoverages {
+    border-left: 1px solid var(--gray-100, #f3f4f6);
+    border-right: 1px solid var(--gray-100, #f3f4f6);
+    border-top: none;
+    border-bottom: none;
+    padding: 0 10px;
+  }
+  .planRowCompanyName { font-size: 0.82rem; margin-bottom: 3px; }
+  /* Los textos de cobertura son demasiado largos para columna angosta → se ven al expandir */
+  .planRowCovItem { display: none; }
+  .planRowExpandBtn { font-size: 0.62rem; padding: 5px 8px; margin-top: 2px; }
+
+  /* Columna precio + botón */
+  .planRowActions { padding-left: 10px; }
+  .planPriceLabel { font-size: 0.5rem; }
+  .planRowOldPrice { font-size: 0.62rem; }
+  .planRowDiscountBadge { font-size: 0.52rem; padding: 1px 4px; }
+  .planRowAmount { font-size: 1.05rem; }
+  .planRowPer { font-size: 0.56rem; }
+  .planRowCuota { font-size: 0.56rem; }
+  .planRowBtn { font-size: 0.72rem; padding: 8px 8px; }
+
+  /* ── Panel de expansión ── */
+  .planExpansion { margin: 10px -14px -14px; border-radius: 0 0 12px 12px; }
   .planExpBody { grid-template-columns: 1fr; gap: 20px; }
   .planExpGrid { grid-template-columns: 1fr; }
   .planExpFooter { flex-direction: column; align-items: flex-start; }
   .planExpCta { width: 100%; text-align: center; }
+}
+
+/* Teléfonos muy pequeños ≤ 480px */
+@media (max-width: 480px) {
+  .resultsPage { padding: 14px 12px 80px; }
+  .planRow { grid-template-columns: 44px 1fr 114px; padding: 12px 12px; }
+  .planRowLogo { height: 28px; max-width: 40px; }
+  .planRowCoverages { padding: 0 8px; }
+  .planRowCompanyName { font-size: 0.76rem; }
+  .planRowActions { padding-left: 8px; }
+  .planRowAmount { font-size: 0.96rem; }
+  .planRowBtn { font-size: 0.66rem; padding: 7px 6px; }
+  .planRowExpandBtn { font-size: 0.58rem; padding: 4px 6px; }
 }
 
 @media (max-width: 860px) {

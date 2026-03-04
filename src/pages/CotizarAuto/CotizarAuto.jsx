@@ -14,6 +14,10 @@ const displayPlate = plate =>
 const formatPrice = n =>
   '$' + n.toLocaleString('es-CO')
 
+const maskedDoc = val =>
+  val.length > 3 ? '•'.repeat(val.length - 3) + val.slice(-3) : val
+
+
 const LOGOS = [
   { src: '/images/logos/bolivar.png',   alt: 'Bolívar'    },
   { src: '/images/logos/allianz.png',   alt: 'Allianz'    },
@@ -171,9 +175,9 @@ function PlanRow({ plan, isLowest, expandedId, onToggle }) {
           <div className={styles.planRowAmount}>
             {formatPrice(plan.price)}<span className={styles.planRowPer}>/año</span>
           </div>
-          <div className={styles.planRowCuota}>o {formatPrice(cuota)}/mes · 11 cuotas</div>
+          <div className={styles.planRowCuota}>o difiérelo a 11 cuotas</div>
         </div>
-        <button className={styles.planRowBtn}>Contratar →</button>
+        {!isExpanded && <button className={styles.planRowBtn}>Contratar →</button>}
       </div>
 
       {isExpanded && (
@@ -217,22 +221,24 @@ function PlanRow({ plan, isLowest, expandedId, onToggle }) {
    Componente principal
 ══════════════════════════════════════════════ */
 export default function CotizarAuto() {
-  const [phase,      setPhase]      = useState('landing')  // 'landing' | 'form' | 'results'
-  const [plate,      setPlate]      = useState('')
-  const [step,       setStep]       = useState(1)          // 1 | 2 | 3
-  const [expandedId, setExpandedId] = useState(null)
+  const [phase,         setPhase]         = useState('landing')
+  const [plate,         setPlate]         = useState('')
+  const [step,          setStep]          = useState(1)
+  const [expandedId,    setExpandedId]    = useState(null)
+  const [numDocFocused, setNumDocFocused] = useState(false)
 
   const togglePlan = id => setExpandedId(prev => prev === id ? null : id)
-  const [form,  setForm]  = useState({
+  const [form, setForm] = useState({
     nombre: '', apellido: '',
-    tipoDoc: 'CC', numDoc: '', fechaNac: '',
+    tipoDoc: 'CC', numDoc: '',
+    diaNac: '', mesNac: '', anioNac: '',
     correo: '', ciudad: '',
   })
 
   const setF = (k, v) => setForm(f => ({ ...f, [k]: v }))
 
   const step1Ok = form.nombre.trim().length >= 2 && form.apellido.trim().length >= 2
-  const step2Ok = form.numDoc.trim().length >= 5 && form.fechaNac.length === 10
+  const step2Ok = form.numDoc.trim().length >= 5 && !!(form.diaNac && form.mesNac && form.anioNac)
   const step3Ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.correo) && form.ciudad.trim().length >= 2
 
   function handlePlate(e) {
@@ -475,7 +481,7 @@ export default function CotizarAuto() {
             ))}
           </div>
 
-          <div className={styles.formInnerGrid}>
+<div className={styles.formInnerGrid}>
           <div className={styles.formLeft}>
           <div className={styles.stepForm}>
 
@@ -507,7 +513,7 @@ export default function CotizarAuto() {
             {step === 2 && (
               <>
                 <h2 className={styles.stepFormTitle}>Tu documento</h2>
-                <p className={styles.stepFormSub}>Necesitamos verificar tu identidad para la póliza</p>
+                <p className={styles.stepFormSub}>Tus datos están protegidos y cifrados.</p>
                 <div className={styles.stepFields2}>
                   <div className={styles.field}>
                     <label className={styles.fieldLabel}>Tipo de documento</label>
@@ -520,16 +526,45 @@ export default function CotizarAuto() {
                     </select>
                   </div>
                   <div className={styles.field}>
-                    <label className={styles.fieldLabel}>Número de documento</label>
-                    <input className={styles.input} placeholder="Ej. 1023456789" autoFocus
-                      value={form.numDoc}
-                      onChange={e => setF('numDoc', e.target.value.replace(/\D/g, ''))} />
+                    <label className={styles.fieldLabel}>
+                      <span className={styles.fieldLabelWithIcon}>🔒 Número de documento</span>
+                    </label>
+                    <input
+                      className={styles.input}
+                      placeholder="Ej. 1023456789"
+                      autoFocus
+                      value={numDocFocused ? form.numDoc : maskedDoc(form.numDoc)}
+                      onFocus={() => setNumDocFocused(true)}
+                      onBlur={() => setNumDocFocused(false)}
+                      onChange={e => setF('numDoc', e.target.value.replace(/\D/g, ''))}
+                    />
                   </div>
                 </div>
                 <div className={`${styles.field} ${styles.fieldFull}`}>
                   <label className={styles.fieldLabel}>Fecha de nacimiento</label>
-                  <input className={styles.input} type="date"
-                    value={form.fechaNac} onChange={e => setF('fechaNac', e.target.value)} />
+                  <div className={styles.dateTriple}>
+                    <select className={styles.select} value={form.diaNac}
+                      onChange={e => setF('diaNac', e.target.value)}>
+                      <option value="">Día</option>
+                      {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
+                        <option key={d} value={d}>{d}</option>
+                      ))}
+                    </select>
+                    <select className={styles.select} value={form.mesNac}
+                      onChange={e => setF('mesNac', e.target.value)}>
+                      <option value="">Mes</option>
+                      {['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'].map((m, i) => (
+                        <option key={i + 1} value={i + 1}>{m}</option>
+                      ))}
+                    </select>
+                    <select className={styles.select} value={form.anioNac}
+                      onChange={e => setF('anioNac', e.target.value)}>
+                      <option value="">Año</option>
+                      {Array.from({ length: 2008 - 1940 + 1 }, (_, i) => 2008 - i).map(y => (
+                        <option key={y} value={y}>{y}</option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
                 <div className={styles.stepFormActions}>
                   <button className={styles.stepBack} type="button" onClick={() => setStep(1)}>
@@ -546,7 +581,7 @@ export default function CotizarAuto() {
             {step === 3 && (
               <>
                 <h2 className={styles.stepFormTitle}>¿Cómo te contactamos?</h2>
-                <p className={styles.stepFormSub}>Tu asesor usará estos datos para enviarte las opciones</p>
+                <p className={styles.stepFormSub}>Tu asesor usará estos datos para enviarte las opciones.</p>
                 <div className={styles.stepFields2}>
                   <div className={styles.field}>
                     <label className={styles.fieldLabel}>Correo electrónico</label>
@@ -672,7 +707,7 @@ export default function CotizarAuto() {
               </div>
               <div className={styles.sideField}>
                 <span className={styles.sideFieldLabel}>{form.tipoDoc}</span>
-                <span className={styles.sideFieldVal}>{form.numDoc}</span>
+                <span className={styles.sideFieldVal}>{maskedDoc(form.numDoc)}</span>
               </div>
               <button className={styles.sideEditBtn} onClick={() => setPhase('form')}>
                 Editar datos →

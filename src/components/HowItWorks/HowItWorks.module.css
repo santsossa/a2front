@@ -593,24 +593,42 @@
 }
 
 @media (max-width: 768px) {
-  .section { padding: 56px 0 48px; }
-  .blob { display: none; }
-  .section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 240px;
-    background: var(--gold);
-    border-radius: 0 0 50% 50% / 0 0 18% 18%;
-    z-index: 0;
+  .section {
+    padding: 52px 0 48px;
+    /* Degradado suave dorado→blanco, sin banda dura que corte el texto */
+    background: linear-gradient(180deg, #fff8e1 0%, #ffffff 220px);
   }
+  .blob { display: none; }
+  /* Sin banda dorada con borde curvo (causaba que texto atravesara colores) */
+  .section::before { display: none; }
+
   .contentWrap { padding: 0 20px; }
   .left { max-width: 100%; }
+
+  /* El eyebrow es gold-dark: visible sobre fondo crema, sin cambio de color */
+  .subtitle {
+    color: var(--gray-600);
+    margin-bottom: 32px;
+  }
+
+  /* Evitar que el desc desborde en pantallas angostas */
+  .stepDesc {
+    max-width: 100%;
+  }
+
+  /* Paso: reducir gap y tamaños en pantallas pequeñas */
+  .step { gap: 16px; }
+  .icon { width: 50px; height: 50px; border-radius: 14px; }
+  .icon svg { width: 20px; height: 20px; }
+  .stepTitle { font-size: 1.05rem; }
+
   .floatGroup { display: none; }
   .ringLg { display: none; }
   .ringSm { display: none; }
 }
 
 @media (max-width: 480px) {
-  .section::before { height: 200px; }
+  .section { background: linear-gradient(180deg, #fff8e1 0%, #ffffff 180px); }
+  .stepTitle { font-size: 1rem; }
+  .body { padding-bottom: 28px; }
 }

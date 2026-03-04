@@ -15,8 +15,9 @@
    ══════════════════════════════════════════ */
 .fold {
   background:
-    linear-gradient(160deg, rgba(246,246,251,0.91) 0%, rgba(236,240,250,0.82) 100%),
+    linear-gradient(rgba(240,240,248,0.92), rgba(240,240,248,0.92)),
     url('/images/Medicina-prepagada.png') center / cover no-repeat;
+  background-color: #f6f6fb;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1329,19 +1330,69 @@
 }
 
 @media (max-width: 768px) {
-  .resultsTopBar { padding: 0 16px; overflow-x: auto; }
+  /* ── Barra superior ── */
+  .resultsTopBar { padding: 0 14px; overflow-x: auto; }
   .resultsTopBarInner { height: auto; padding: 12px 0; gap: 16px; flex-wrap: wrap; }
   .rtbItem { padding: 0; }
   .rtbDivider { display: none; }
   .whatsappSection { flex-direction: column; text-align: center; padding: 24px 20px; }
   .whatsappBtn { width: 100%; justify-content: center; }
-  .resultsPage { padding: 20px 16px 80px; }
-  .resultsSidebar { position: static; flex-direction: column; }
-  .planRow { grid-template-columns: 1fr; gap: 12px; padding: 18px 16px; }
-  .planRowLogoCol { padding-right: 0; }
-  .planRowCoverages { border-left: none; border-right: none; padding: 12px 0; border-top: 1px solid var(--gray-100, #f3f4f6); border-bottom: 1px solid var(--gray-100, #f3f4f6); }
-  .planRowActions { padding-left: 0; }
-  .planExpansion { margin: 10px -16px -18px; }
+  .resultsPage { padding: 16px 14px 80px; }
+
+  /* ── Sidebar → franja compacta de datos al tope ── */
+  .resultsSidebar { position: static; flex-direction: column; gap: 0; margin-bottom: 16px; }
+
+  /* Primer sideCard: "Tu cotización" → tira horizontal de datos */
+  .sideCard:first-child {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 20px;
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+  .sideCard:first-child .sideCardTitle { display: none; }
+  .sideCard:first-child .sideField { flex-direction: row; align-items: center; gap: 4px; }
+  .sideCard:first-child .sideFieldLabel { font-size: 0.52rem; letter-spacing: 0.04em; }
+  .sideCard:first-child .sideFieldVal { font-size: 0.76rem; font-weight: 700; }
+  .sideCard:first-child .sideEditBtn { width: auto; padding: 5px 12px; font-size: 0.68rem; margin-top: 0; }
+
+  /* Segundo sideCard: "¿Cómo funciona?" → oculto en móvil */
+  .sideCard:last-child { display: none; }
+
+  /* ── Plan rows → 3 columnas horizontales (estilo PC adaptado) ── */
+  .planRow {
+    grid-template-columns: 52px 1fr 128px;
+    gap: 0;
+    padding: 14px 14px;
+    align-items: center;
+  }
+  .planRowLogoCol { padding: 0; justify-content: flex-start; }
+  .planLogoText { width: 38px; height: 38px; font-size: 0.68rem; border-radius: 10px; }
+
+  /* Columna coberturas: bordes laterales restaurados, sin borde arriba/abajo */
+  .planRowCoverages {
+    border-left: 1px solid var(--gray-100, #f3f4f6);
+    border-right: 1px solid var(--gray-100, #f3f4f6);
+    border-top: none;
+    border-bottom: none;
+    padding: 0 10px;
+  }
+  .planRowCompanyName { font-size: 0.82rem; margin-bottom: 3px; }
+  /* Los textos de cobertura son demasiado largos para columna angosta → se ven al expandir */
+  .planRowCovItem { display: none; }
+  .planRowExpandBtn { font-size: 0.62rem; padding: 5px 8px; margin-top: 2px; }
+
+  /* Columna precio + botón */
+  .planRowActions { padding-left: 10px; }
+  .planPriceLabel { font-size: 0.5rem; }
+  .planRowAmount { font-size: 1.05rem; }
+  .planRowPer { font-size: 0.56rem; }
+  .planRowAnual { font-size: 0.56rem; }
+  .planRowBtn { font-size: 0.72rem; padding: 8px 8px; }
+
+  /* ── Panel de expansión ── */
+  .planExpansion { margin: 10px -14px -14px; border-radius: 0 0 12px 12px; }
   .planExpBody { grid-template-columns: 1fr; gap: 20px; }
   .planExpGrid { grid-template-columns: 1fr; }
   .planExpFooter { flex-direction: column; align-items: flex-start; }
@@ -1350,7 +1401,19 @@
 }
 
 @media (max-width: 600px) {
-  .fold { height: auto; min-height: calc(100vh - 72px); padding: 40px 20px; overflow: visible; }
+  .fold { min-height: unset; height: auto; padding: 40px 28px 32px; gap: 18px; overflow: visible; }
+  .foldText { max-width: 320px; }
+  .h1 { font-size: clamp(1.25rem, 6.5vw, 1.7rem); margin: 0 0 12px; }
+  .h1Sub { font-size: 0.78rem; }
+  .featureTags { gap: 6px; }
+  .featureTag { font-size: 0.70rem; padding: 4px 10px; }
+  .dateCard { max-width: 320px; padding: 18px 16px 14px; }
+  .dateCardHead { margin-bottom: 14px; }
+  .dateCardHead h2 { font-size: 0.9rem; }
+  .dateCardHead p { font-size: 0.72rem; }
+  .dateInput { font-size: 0.9rem; height: 40px; }
+  .ctaBtn { padding: 11px; font-size: 0.84rem; }
+  .logosWrap { display: none; }
   .statsStrip { flex-wrap: wrap; }
   .stat { padding: 24px 20px; min-width: 140px; }
   .compSection { padding: 56px 20px; }
@@ -1361,7 +1424,6 @@
   .stepForm { padding: 24px 20px; }
   .stepFields2 { grid-template-columns: 1fr; }
   .stepperLabel { display: none; }
-  .dateCard { padding: 24px 20px 20px; }
 }
 
 @media (max-width: 480px) {
@@ -1370,4 +1432,15 @@
   .compColMed { border-left: none; }
   .compColHeader:first-child, .compRowLabel { display: none; }
   .tMiniGrid { grid-template-columns: 1fr; }
+
+  /* ── Plan rows en teléfonos muy pequeños ── */
+  .resultsPage { padding: 14px 12px 80px; }
+  .planRow { grid-template-columns: 44px 1fr 114px; padding: 12px 12px; }
+  .planLogoText { width: 34px; height: 34px; }
+  .planRowCoverages { padding: 0 8px; }
+  .planRowCompanyName { font-size: 0.76rem; }
+  .planRowActions { padding-left: 8px; }
+  .planRowAmount { font-size: 0.96rem; }
+  .planRowBtn { font-size: 0.66rem; padding: 7px 6px; }
+  .planRowExpandBtn { font-size: 0.58rem; padding: 4px 6px; }
 }

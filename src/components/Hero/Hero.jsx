@@ -115,8 +115,8 @@ export default function Hero() {
     <section className={styles.hero} id="inicio">
       <div className={`container ${styles.heroInner}`}>
 
-        {/* ── LEFT ── */}
-        <div className={styles.left}>
+        {/* ── TITLE (col 1, row 1) ── */}
+        <div className={styles.titleCol}>
           <h1 className={styles.title}>
             Compara todos los<br />
             Seguros del mercado<br />
@@ -125,7 +125,19 @@ export default function Hero() {
               <span className={`${styles.cursor} ${isTyping ? styles.cursorBlink : ''}`}>|</span>
             </span>
           </h1>
+        </div>
 
+        {/* ── IMAGE (col 2, rows 1-2) ── */}
+        <div className={styles.right}>
+          <img
+            src={IMG_SRC}
+            alt="Comparador de seguros"
+            className={styles.illustration}
+          />
+        </div>
+
+        {/* ── INSIGHTS (col 1, row 2) ── */}
+        <div className={styles.insightCol}>
           <div className={styles.statsRow}>
             {STATS.map(s => (
               <div key={s.label} className={styles.stat}>
@@ -147,15 +159,6 @@ export default function Hero() {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* ── RIGHT ── */}
-        <div className={styles.right}>
-          <img
-            src={IMG_SRC}
-            alt="Comparador de seguros"
-            className={styles.illustration}
-          />
         </div>
 
       </div>

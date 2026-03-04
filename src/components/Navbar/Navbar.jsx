@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Navbar.module.css'
 
@@ -59,6 +59,7 @@ export default function Navbar({ hideTopBar = false }) {
   const [menuOpen,      setMenuOpen]      = useState(false)
   const [productsOpen,  setProductsOpen]  = useState(false)
   const [scrolled,      setScrolled]      = useState(false)
+  const navRef = useRef(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -67,6 +68,20 @@ export default function Navbar({ hideTopBar = false }) {
   }, [])
 
   const closeAll = () => { setMenuOpen(false); setProductsOpen(false) }
+
+  // Cerrar al hacer clic fuera del navbar
+  useEffect(() => {
+    if (!menuOpen) return
+    const handler = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) closeAll()
+    }
+    document.addEventListener('mousedown', handler)
+    document.addEventListener('touchstart', handler)
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('touchstart', handler)
+    }
+  }, [menuOpen])
 
   return (
     <>
@@ -89,7 +104,7 @@ export default function Navbar({ hideTopBar = false }) {
       )}
 
       {/* ── Main navbar ── */}
-      <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
+      <header ref={navRef} className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
         <div className={`container ${styles.navInner}`}>
 
           {/* Logo */}
@@ -97,17 +112,20 @@ export default function Navbar({ hideTopBar = false }) {
             <img src="/images/logo-curvas.png" alt="Asegura2" className={styles.logoImg} />
           </Link>
 
-          {/* Desktop nav */}
+          {/* Nav links */}
           <nav className={`${styles.navLinks} ${menuOpen ? styles.navOpen : ''}`}>
             <Link to="/" onClick={closeAll}>Inicio</Link>
 
             {/* Mega menu Productos */}
             <div
               className={styles.megaWrap}
-              onMouseEnter={() => setProductsOpen(true)}
-              onMouseLeave={() => setProductsOpen(false)}
+              onMouseEnter={() => { if (window.matchMedia('(hover: hover)').matches) setProductsOpen(true) }}
+              onMouseLeave={() => { if (window.matchMedia('(hover: hover)').matches) setProductsOpen(false) }}
             >
-              <button className={styles.dropdownTrigger}>
+              <button
+                className={styles.dropdownTrigger}
+                onClick={() => setProductsOpen(o => !o)}
+              >
                 Productos
                 <svg
                   className={`${styles.dropdownArrow} ${productsOpen ? styles.dropdownArrowOpen : ''}`}
@@ -117,7 +135,7 @@ export default function Navbar({ hideTopBar = false }) {
                 </svg>
               </button>
 
-              {/* Panel flotante */}
+              {/* Panel flotante - solo desktop */}
               {productsOpen && (
                 <div className={styles.megaMenu}>
                   <div className={styles.megaPanel}>
@@ -141,12 +159,29 @@ export default function Navbar({ hideTopBar = false }) {
               )}
             </div>
 
+            {/* Lista de productos inline - solo móvil */}
+            <div className={`${styles.mobileProducts} ${productsOpen ? styles.mobileProductsOpen : ''}`}>
+              {PRODUCTS.map(p => p.to ? (
+                <Link key={p.to} to={p.to} className={styles.mobileProductItem} onClick={closeAll}>
+                  <div className={styles.mobileProductIcon}>{p.icon}</div>
+                  <span>{p.label}</span>
+                </Link>
+              ) : (
+                <a key={p.href} href={p.href} className={styles.mobileProductItem} onClick={closeAll}>
+                  <div className={styles.mobileProductIcon}>{p.icon}</div>
+                  <span>{p.label}</span>
+                </a>
+              ))}
+            </div>
+
             <Link to="/nosotros" onClick={closeAll}>Nosotros</Link>
             <a href="/#contacto" onClick={closeAll}>Contacto</a>
           </nav>
 
           <button className={styles.hamburger} aria-label="Menú" onClick={() => setMenuOpen(o => !o)}>
-            {menuOpen ? '✕' : '☰'}
+            <span className={`${styles.hbar} ${menuOpen ? styles.hbarOpen1 : ''}`} />
+            <span className={`${styles.hbar} ${menuOpen ? styles.hbarOpen2 : ''}`} />
+            <span className={`${styles.hbar} ${menuOpen ? styles.hbarOpen3 : ''}`} />
           </button>
         </div>
       </header>
